@@ -265,3 +265,35 @@ def dfs(node, par):
 
 return dfs(0, -1) and len(visit) == n
 
+##back
+
+def permute(nums):
+    def backtrack(start=0):
+        if start == len(nums):
+            result.append(nums[:])  # Adiciona uma cópia da permutação atual
+            return
+        
+        for i in range(start, len(nums)):
+            # Troca os elementos
+            nums[start], nums[i] = nums[i], nums[start]
+            
+            # Chama recursivamente para fixar o próximo elemento
+            backtrack(start + 1)
+            
+            # Desfaz a troca (backtracking)
+            nums[start], nums[i] = nums[i], nums[start]
+
+    result = []
+    backtrack()
+    return result
+
+# Leitura da entrada
+n = int(input())  # Lê o número de elementos
+nums = list(map(int, input().split()))  # Lê os números separados por espaço
+
+# Gera todas as permutações
+permutations = permute(nums)
+
+# Exibe as permutações
+for perm in permutations:
+    print(" ".join(map(str, perm)))
